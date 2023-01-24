@@ -1,7 +1,5 @@
 import random
 from openpyxl import Workbook,load_workbook
-import pandas as pd
-
 print("""
 İngilizce Kelime Oyununa Hoş Geldiniz
 Yarışma Boyunca 5 Hakkınız Bulunmaktadır 
@@ -12,8 +10,6 @@ Yapmak İstediğiniz İşlemi Giriniz
 2- Kelime Oyunu
 3- Kalıp Cümleleri Listele
 4- Cümle Oyunu
-
-
 
 """)
 def c_listele():
@@ -55,7 +51,7 @@ def Cümle():
             Hak = Hak - 1
             print("Kalan Hakkınız : {}".format(Hak))
             print("*************")
-            print("Doğru Cevap: {}".format(b))
+            print("Doğrusu: {}".format(b))
             print("*************")
     print("Oyun Bitti. Puanınız {}".format(puan))
 def KelimeTr():
@@ -75,8 +71,6 @@ def KelimeTr():
         if cevap == "q":
             break
         a = cevap.title()
-
-
         if a == c:
             puan = puan + 2
             print("*************")
@@ -91,7 +85,7 @@ def KelimeTr():
             Hak = Hak - 1
             print("Kalan Hakkınız : {}".format(Hak))
             print("*************")
-            print("Doğru Cevap: {}".format(c))
+            print("Doğrusu: {}".format(c))
             print("*************")
     print("Oyun Bitti. Puanınız {}".format(puan))
 def KelimeEn():
@@ -127,7 +121,7 @@ def KelimeEn():
             Hak = Hak - 1
             print("Kalan Hakkınız : {}".format(Hak))
             print("*************")
-            print("Doğru Cevap: {}".format(b))
+            print("Doğrusu: {}".format(b))
             print("*************")
     print("Oyun Bitti. Puanınız {}".format(puan))
 
