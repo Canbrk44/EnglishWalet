@@ -134,19 +134,19 @@ def k_listele():
 
         print()
 while True:
-    islem = int(input("Kararınız: "))
-    if islem == 1:
+    islem = input("Kararınız: ")
+    if islem == "1":
         k_listele()
-    elif islem == 2:
+    elif islem == "2":
         islem2=input("Türkçe Çeviri / İngilizce Çeviri - (Tr)(En) ")
         Sens= islem2.title()
         if Sens == "En":
             KelimeEn()
         else:
             KelimeTr()
-    elif islem == 3:
+    elif islem == "3":
         c_listele()
-    elif islem == 4:
+    elif islem == "4":
         Cümle()
 
 
