@@ -65,7 +65,7 @@ def KelimeTr():
         if cevap == "q":
             break
         a = cevap.title()
-        if a == c:
+        if a.lower() == c:
             puan = puan + 2
             print("*************")
             print("Tebrikler Doğru Cevap !!!")
