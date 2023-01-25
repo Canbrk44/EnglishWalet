@@ -5,12 +5,6 @@ print("""
 Yarışma Boyunca 5 Hakkınız Bulunmaktadır 
 Her Doğru Cevap Hanenize 2 Puan Kazandıracaktır
 
-Yapmak İstediğiniz İşlemi Giriniz
-1- Bütün Kelimeleri Gözden Geçir
-2- Kelime Oyunu
-3- Kalıp Cümleleri Listele
-4- Cümle Oyunu
-
 """)
 def c_listele():
     wb = load_workbook("Cümleler.xlsx")
@@ -134,6 +128,9 @@ def k_listele():
 
         print()
 while True:
+    print("1-Kelime Listele | 2-Kelime Oyunu | 3-Cümle Listele | 4-Cümle Oyunu")
+    print("*"*70)
+
     islem = input("Kararınız: ")
     if islem == "1":
         k_listele()
