@@ -25,20 +25,19 @@ def Cümle():
     while True:
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(c))
+        uppers = str(b)
         cevap = input("Cevabı Giriniz: ")
         if cevap == "q":
             break
-        a = cevap.title()
-        if a == b:
-            puan = puan + 2
+        if cevap.title() == uppers.title():
+            puan = puan + 5
             print("*************")
-            print("Tebrikler Doğru Cevap !!!")
-            print("*************")
-            print("Puanınız: {}".format(puan))
+            print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
             print("*************")
 
         else:
-            print("Yanlıs Cevap")
+            puan = puan - 5
+            print("Yanlıs Cevap", "Puanınız: {}".format(puan))
             print("*************")
             print("Doğrusu: {}".format(b))
             print("*************")
@@ -55,20 +54,21 @@ def KelimeTr():
     while True:
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(b))
+        uppers = str(b)
         cevap = input("Cevabı Giriniz: ")
         if cevap == "q":
             break
-        a = cevap.title()
-        if a.lower() == c:
-            puan = puan + 2
+        if cevap.title() == uppers.title():
+            puan = puan + 5
             print("*************")
-            print("Tebrikler Doğru Cevap !!!")
+            print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
             print("*************")
-            print("Puanınız: {}".format(puan))
-            print("*************")
+
         else:
+            puan = puan - 5
+            print("Yanlıs Cevap", "Puanınız: {}".format(puan))
             print("*************")
-            print("Doğrusu: {}".format(c))
+            print("Doğrusu: {}".format(b))
             print("*************")
     print("Oyun Bitti. Puanınız {}".format(puan))
 def KelimeEn():
@@ -83,19 +83,19 @@ def KelimeEn():
     while True:
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(c))
+        uppers=str(b)
         cevap = input("Cevabı Giriniz: ")
         if cevap == "q":
             break
-        a = cevap.title()
-        if a == b:
-            puan = puan + 2
+        if cevap.title() == uppers.title():
+            puan = puan + 5
             print("*************")
-            print("Tebrikler Doğru Cevap !!!")
+            print("Tebrikler Doğru Cevap !!!","Puanınız: {}".format(puan))
             print("*************")
-            print("Puanınız: {}".format(puan))
-            print("*************")
+
         else:
-            print("Yanlıs Cevap")
+            puan = puan - 5
+            print("Yanlıs Cevap","Puanınız: {}".format(puan))
             print("*************")
             print("Doğrusu: {}".format(b))
             print("*************")
