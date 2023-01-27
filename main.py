@@ -13,7 +13,6 @@ def c_listele():
         for sutun in range(1,ws.max_column+1):
             print(" | "+str(ws.cell(satir,sutun).value) + " | ",end="")
         print()
-
 def Cümle():
     wb = load_workbook("Cümleler.xlsx")
     ws = wb.active
@@ -22,9 +21,8 @@ def Cümle():
         en = ws["A{}".format(i)].value
         tr = ws["B{}".format(i)].value
         words[en] = tr
-    Hak = 5
     puan = 0
-    while Hak>0:
+    while True:
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(c))
         cevap = input("Cevabı Giriniz: ")
@@ -42,9 +40,6 @@ def Cümle():
         else:
             print("Yanlıs Cevap")
             print("*************")
-            Hak = Hak - 1
-            print("Kalan Hakkınız : {}".format(Hak))
-            print("*************")
             print("Doğrusu: {}".format(b))
             print("*************")
     print("Oyun Bitti. Puanınız {}".format(puan))
@@ -56,9 +51,8 @@ def KelimeTr():
         en = ws["A{}".format(i)].value
         tr = ws["B{}".format(i)].value
         words[en] = tr
-    Hak = 5
     puan = 0
-    while Hak>0:
+    while True:
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(b))
         cevap = input("Cevabı Giriniz: ")
@@ -72,12 +66,7 @@ def KelimeTr():
             print("*************")
             print("Puanınız: {}".format(puan))
             print("*************")
-
         else:
-            print("Yanlıs Cevap")
-            print("*************")
-            Hak = Hak - 1
-            print("Kalan Hakkınız : {}".format(Hak))
             print("*************")
             print("Doğrusu: {}".format(c))
             print("*************")
@@ -90,17 +79,14 @@ def KelimeEn():
         en = ws["A{}".format(i)].value
         tr = ws["B{}".format(i)].value
         words[en] = tr
-    Hak = 5
     puan = 0
-    while Hak>0:
+    while True:
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(c))
         cevap = input("Cevabı Giriniz: ")
         if cevap == "q":
             break
         a = cevap.title()
-
-
         if a == b:
             puan = puan + 2
             print("*************")
@@ -108,12 +94,8 @@ def KelimeEn():
             print("*************")
             print("Puanınız: {}".format(puan))
             print("*************")
-
         else:
             print("Yanlıs Cevap")
-            print("*************")
-            Hak = Hak - 1
-            print("Kalan Hakkınız : {}".format(Hak))
             print("*************")
             print("Doğrusu: {}".format(b))
             print("*************")
@@ -125,10 +107,9 @@ def k_listele():
     for satir in range(2,ws.max_row+1):
         for sutun in range(1,ws.max_column+1):
             print(" | "+str(ws.cell(satir,sutun).value) + " | ",end="")
-
         print()
 while True:
-    print("1-Kelime Listele | 2-Kelime Oyunu | 3-Cümle Listele | 4-Cümle Oyunu")
+    print("1-Kelime Listele | 2-Kelime Oyunu | 3-Cümle Listele | 4-Cümle Oyunu | q - Çıkış")
     print("*"*70)
 
     islem = input("Kararınız: ")
