@@ -1,5 +1,6 @@
 import random
 from openpyxl import Workbook, load_workbook
+import sys
 
 print("""
 İngilizce Kelime Oyununa Hoş Geldiniz
@@ -89,6 +90,8 @@ def KelimeEn():
         tr = ws["B{}".format(i)].value
         words[en] = tr
     puan = 0
+    statusTrue = {}
+    statusFalse = {}
     while True:
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(c))
@@ -97,18 +100,34 @@ def KelimeEn():
         if cevap == "q":
             break
         if cevap.title() == uppers.title():
+            statusTrue[c]=uppers
             puan = puan + 5
             print("*************")
             print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
             print("*************")
-
         else:
+            statusFalse[c]=uppers
             puan = puan - 5
             print("Yanlıs Cevap", "Puanınız: {}".format(puan))
             print("*************")
             print("Doğrusu: {}".format(b))
             print("*************")
     print("Oyun Bitti. Puanınız {}".format(puan))
+
+    # for dogru in statusTrue.items():
+    #     print(f"Doğru cevaplarınız: {dogru}",end="|")
+    #     for yanlis in statusFalse.items():
+    #         print(f"Yanlis Cevaplarınız: {yanlis}")
+    print("Sonuclar: 1-Doğru Cevaplarım | 2-Yanlıs Cevaplarım")
+    myStat=int(input("Seçiminiz: "))
+    if myStat == 1:
+        for i in statusTrue.items():
+            print("Doğru Cevaplarınız {}".format(str(i)))
+    elif myStat == 2:
+        for i in statusFalse.items():
+            print("Yanlış Cevaplarınız {}".format(str(i)))
+    else:
+        print("Hatalı Bir Seçim Yaptınız")
 
 
 def k_listele():
