@@ -1,13 +1,46 @@
 import random
-from openpyxl import Workbook, load_workbook
-import sys
 
-print("""
-İngilizce Kelime Oyununa Hoş Geldiniz
-Yarışma Boyunca 5 Hakkınız Bulunmaktadır 
-Her Doğru Cevap Hanenize 2 Puan Kazandıracaktır
+from openpyxl import load_workbook
 
-""")
+
+def cumleekle():
+    wb = load_workbook("Cümleler.xlsx")
+    ws = wb.active
+    words = {}
+    for i in range(2, ws.max_row + 1):
+        en = ws["A{}".format(i)].value
+        tr = ws["B{}".format(i)].value
+        words[en] = tr
+    sayac = 1
+    for _ in words:
+        sayac = sayac + 1
+    print("Toplam Cümle Sayısı: {}".format(sayac))
+    ing = input("Ingilizce Cümle Giriniz: ")
+    tr = input("Türkçe Karşılığını Giriniz: ")
+    ws.append([ing, tr])
+    wb.save("Cümleler.xlsx")
+    print("{}-{}".format(ing, tr))
+    print("Cümleniz Başarıyla Eklenmiştir")
+    wb.close()
+def kelimeekle():
+    wb = load_workbook("Words.xlsx")
+    ws = wb.active
+    words = {}
+    for i in range(2, ws.max_row + 1):
+        en = ws["A{}".format(i)].value
+        tr = ws["B{}".format(i)].value
+        words[en] = tr
+    sayac = 1
+    for _ in words:
+        sayac = sayac + 1
+    print(f"Toplam Kelime Sayısı: {sayac}")
+    ing = input("Ingilizce Kelime Giriniz: ")
+    tr = input("Türkçe Karşılığını Giriniz: ")
+    ws.append([ing, tr])
+    wb.save("Words.xlsx")
+    print("{}-{}".format(ing,tr))
+    print("Kelimeniz Başarıyla Eklenmiştir")
+    wb.close()
 
 
 def c_listele():
@@ -118,13 +151,13 @@ def KelimeEn():
         if cevap == "q":
             break
         if cevap.title() == uppers.title():
-            statusTrue[c]=uppers
+            statusTrue[c] = uppers
             puan = puan + 5
             print("*************")
             print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
             print("*************")
         else:
-            statusFalse[c]=uppers
+            statusFalse[c] = uppers
             puan = puan - 5
             print("Yanlıs Cevap", "Puanınız: {}".format(puan))
             print("*************")
@@ -137,7 +170,7 @@ def KelimeEn():
     #     for yanlis in statusFalse.items():
     #         print(f"Yanlis Cevaplarınız: {yanlis}")
     print("Sonuclar: 1-Doğru Cevaplarım | 2-Yanlıs Cevaplarım")
-    myStat=int(input("Seçiminiz: "))
+    myStat = int(input("Seçiminiz: "))
     if myStat == 1:
         for i in statusTrue.items():
             print("Doğru Cevaplarınız {}".format(str(i)))
@@ -155,13 +188,15 @@ def k_listele():
         for sutun in range(1, ws.max_column + 1):
             print(" | " + str(ws.cell(satir, sutun).value) + " | ", end="")
         print()
-
-
 while True:
-    print("1-Kelime Listele | 2-Kelime Oyunu | 3-Cümle Listele | 4-Cümle Oyunu | q - Çıkış")
+    print("1-Kelime Listele | 2-Kelime Oyunu | 3-Cümle Listele | 4-Cümle Oyunu | 5-Kelime Ekle | 6-Cümle Ekle |  q-"
+          "Çıkış")
     print("*" * 70)
 
     islem = input("Kararınız: ")
+    if islem == "q":
+        print("Programdan Çıkılıyor")
+        exit()
     if islem == "1":
         k_listele()
     elif islem == "2":
@@ -175,3 +210,7 @@ while True:
         c_listele()
     elif islem == "4":
         Cumle()
+    elif islem == "5":
+        kelimeekle()
+    elif islem == "6":
+        cumleekle()
