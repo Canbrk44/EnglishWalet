@@ -1,8 +1,5 @@
 import random
-
 from openpyxl import load_workbook
-
-
 def cumleekle():
     wb = load_workbook("Cümleler.xlsx")
     ws = wb.active
@@ -41,8 +38,6 @@ def kelimeekle():
     print("{}-{}".format(ing,tr))
     print("Kelimeniz Başarıyla Eklenmiştir")
     wb.close()
-
-
 def c_listele():
     wb = load_workbook("Cümleler.xlsx")
     ws = wb.active
@@ -50,8 +45,6 @@ def c_listele():
         for sutun in range(1, ws.max_column + 1):
             print(" | " + str(ws.cell(satir, sutun).value) + " | ", end="")
         print()
-
-
 def Cumle():
     wb = load_workbook("Cümleler.xlsx")
     ws = wb.active
@@ -70,19 +63,17 @@ def Cumle():
             break
         if cevap.title() == uppers.title():
             puan = puan + 5
-            print("*************")
+            print("-------------")
             print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
-            print("*************")
+            print("-------------")
 
         else:
             puan = puan - 5
             print("Yanlıs Cevap", "Puanınız: {}".format(puan))
-            print("*************")
+            print("-------------")
             print("Doğrusu: {}".format(b))
-            print("*************")
+            print("-------------")
     print("Oyun Bitti. Puanınız {}".format(puan))
-
-
 def KelimeTr():
     wb = load_workbook("Words.xlsx")
     ws = wb.active
@@ -98,22 +89,30 @@ def KelimeTr():
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(b))
         uppers = str(c)
+        for i in uppers:
+            print(i, end="")
+            break
+        uz = len(uppers)
+        for i in range(uz-2):
+            print("*", end="")
+        print(uppers[-1])
+        print()
         cevap = input("Cevabı Giriniz: ")
         if cevap == "q":
             break
         if cevap.title() == uppers.title():
             statusTrue[b] = uppers
             puan = puan + 5
-            print("*************")
+            print("-------------")
             print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
-            print("*************")
+            print("-------------")
         else:
             statusFalse[b] = uppers
             puan = puan - 5
             print("Yanlıs Cevap", "Puanınız: {}".format(puan))
-            print("*************")
+            print("-------------")
             print("Doğrusu: {}".format(c))
-            print("*************")
+            print("-------------")
     print("Oyun Bitti. Puanınız {}".format(puan))
 
     # for dogru in statusTrue.items():
@@ -130,8 +129,6 @@ def KelimeTr():
             print("Yanlış Cevaplarınız {}".format(str(i)))
     else:
         print("Hatalı Bir Seçim Yaptınız")
-
-
 def KelimeEn():
     wb = load_workbook("Words.xlsx")
     ws = wb.active
@@ -147,22 +144,30 @@ def KelimeEn():
         c, b = random.choice(list(words.items()))
         print("Sorunuz: {}".format(c))
         uppers = str(b)
+        for i in uppers:
+            print(i,end="")
+            break
+        uz = len(uppers)
+        for i in range(uz-2):
+            print("*",end="")
+        print(uppers[-1])
+        print()
         cevap = input("Cevabı Giriniz: ")
         if cevap == "q":
             break
         if cevap.title() == uppers.title():
             statusTrue[c] = uppers
             puan = puan + 5
-            print("*************")
+            print("-------------")
             print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
-            print("*************")
+            print("-------------")
         else:
             statusFalse[c] = uppers
             puan = puan - 5
             print("Yanlıs Cevap", "Puanınız: {}".format(puan))
-            print("*************")
+            print("-------------")
             print("Doğrusu: {}".format(b))
-            print("*************")
+            print("-------------")
     print("Oyun Bitti. Puanınız {}".format(puan))
 
     # for dogru in statusTrue.items():
@@ -179,8 +184,6 @@ def KelimeEn():
             print("Yanlış Cevaplarınız {}".format(str(i)))
     else:
         print("Hatalı Bir Seçim Yaptınız")
-
-
 def k_listele():
     wb = load_workbook("Words.xlsx")
     ws = wb.active
