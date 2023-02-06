@@ -66,7 +66,6 @@ def Cumle():
             print("-------------")
             print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
             print("-------------")
-
         else:
             puan = puan - 5
             print("Yanlıs Cevap", "Puanınız: {}".format(puan))
