@@ -1,197 +1,115 @@
 import random
+import sqlite3 as sql
 from openpyxl import load_workbook
-def cumleekle():
-    wb = load_workbook("Cümleler.xlsx")
-    ws = wb.active
-    words = {}
-    for i in range(2, ws.max_row + 1):
-        en = ws["A{}".format(i)].value
-        tr = ws["B{}".format(i)].value
-        words[en] = tr
-    sayac = 1
-    for _ in words:
-        sayac = sayac + 1
-    print("Toplam Cümle Sayısı: {}".format(sayac))
-    ing = input("Ingilizce Cümle Giriniz: ")
-    tr = input("Türkçe Karşılığını Giriniz: ")
-    ws.append([ing, tr])
-    wb.save("Cümleler.xlsx")
-    print("{}-{}".format(ing, tr))
-    print("Cümleniz Başarıyla Eklenmiştir")
-    wb.close()
+vt = sql.connect('englishwalet.db')
+im = vt.cursor()
+def main():
+    print("Programı ilk defa çalıştırıyorsanız bölüm ekleyerek başlıyabilirsiniz.")
+
+if __name__ == "__main__":
+    main()
 def kelimeekle():
-    wb = load_workbook("Words.xlsx")
-    ws = wb.active
-    words = {}
-    for i in range(2, ws.max_row + 1):
-        en = ws["A{}".format(i)].value
-        tr = ws["B{}".format(i)].value
-        words[en] = tr
-    sayac = 1
-    for _ in words:
-        sayac = sayac + 1
-    print(f"Toplam Kelime Sayısı: {sayac}")
-    ing = input("Ingilizce Kelime Giriniz: ")
-    tr = input("Türkçe Karşılığını Giriniz: ")
-    ws.append([ing, tr])
-    wb.save("Words.xlsx")
-    print("{}-{}".format(ing,tr))
-    print("Kelimeniz Başarıyla Eklenmiştir")
-    wb.close()
-def c_listele():
-    wb = load_workbook("Cümleler.xlsx")
-    ws = wb.active
-    for satir in range(2, ws.max_row + 1):
-        for sutun in range(1, ws.max_column + 1):
-            print(" | " + str(ws.cell(satir, sutun).value) + " | ", end="")
-        print()
-def Cumle():
-    wb = load_workbook("Cümleler.xlsx")
-    ws = wb.active
-    words = {}
-    for i in range(2, ws.max_row + 1):
-        en = ws["A{}".format(i)].value
-        tr = ws["B{}".format(i)].value
-        words[en] = tr
-    puan = 0
     while True:
-        c, b = random.choice(list(words.items()))
-        print("Sorunuz: {}".format(c))
-        uppers = str(b)
-        cevap = input("Cevabı Giriniz: ")
-        if cevap == "q":
-            break
-        if cevap.title() == uppers.title():
-            puan = puan + 5
-            print("-------------")
-            print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
-            print("-------------")
-        else:
-            puan = puan - 5
-            print("Yanlıs Cevap", "Puanınız: {}".format(puan))
-            print("-------------")
-            print("Doğrusu: {}".format(b))
-            print("-------------")
-    print("Oyun Bitti. Puanınız {}".format(puan))
-def KelimeTr():
-    wb = load_workbook("Words.xlsx")
-    ws = wb.active
-    words = {}
-    for i in range(2, ws.max_row + 1):
-        en = ws["A{}".format(i)].value
-        tr = ws["B{}".format(i)].value
-        words[en] = tr
-    puan = 0
-    statusTrue = {}
-    statusFalse = {}
-    while True:
-        c, b = random.choice(list(words.items()))
-        print("Sorunuz: {}".format(b))
-        uppers = str(c)
-        for i in uppers:
-            print(i, end="")
-            break
-        uz = len(uppers)
-        for i in range(uz-2):
-            print("*", end="")
-        print(uppers[-1])
-        print()
-        cevap = input("Cevabı Giriniz: ")
-        if cevap == "q":
-            break
-        if cevap.title() == uppers.title():
-            statusTrue[b] = uppers
-            puan = puan + 5
-            print("-------------")
-            print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
-            print("-------------")
-        else:
-            statusFalse[b] = uppers
-            puan = puan - 5
-            print("Yanlıs Cevap", "Puanınız: {}".format(puan))
-            print("-------------")
-            print("Doğrusu: {}".format(c))
-            print("-------------")
-    print("Oyun Bitti. Puanınız {}".format(puan))
+        tables_query = "SELECT name FROM sqlite_master WHERE type='table';"
+        cursor = vt.cursor()
+        cursor.execute(tables_query)
+        tables = cursor.fetchall()
+        table_names = [table[0] for table in tables]
+        print("Bölümler:")
+        bölümler = []
+        for table_name in table_names:
+            bölümler.append(table_name)
+        for i in bölümler:
+            print(i)
 
-    # for dogru in statusTrue.items():
-    #     print(f"Doğru cevaplarınız: {dogru}",end="|")
-    #     for yanlis in statusFalse.items():
-    #         print(f"Yanlis Cevaplarınız: {yanlis}")
-    print("Sonuclar: 1-Doğru Cevaplarım | 2-Yanlıs Cevaplarım")
-    myStat = int(input("Seçiminiz: "))
-    if myStat == 1:
-        for i in statusTrue.items():
-            print("Doğru Cevaplarınız {}".format(str(i)))
-    elif myStat == 2:
-        for i in statusFalse.items():
-            print("Yanlış Cevaplarınız {}".format(str(i)))
-    else:
-        print("Hatalı Bir Seçim Yaptınız")
-def KelimeEn():
-    wb = load_workbook("Words.xlsx")
-    ws = wb.active
-    words = {}
-    for i in range(2, ws.max_row + 1):
-        en = ws["A{}".format(i)].value
-        tr = ws["B{}".format(i)].value
-        words[en] = tr
-    puan = 0
-    statusTrue = {}
-    statusFalse = {}
-    while True:
-        c, b = random.choice(list(words.items()))
-        print("Sorunuz: {}".format(c))
-        uppers = str(b)
-        for i in uppers:
-            print(i,end="")
+        bölüm = input("Hangi Bölüme Kelime Girmek istiyorsunuz?: ")
+        bölüm = bölüm.lower()
+        if bölüm == "q":
             break
-        uz = len(uppers)
-        for i in range(uz-2):
-            print("*",end="")
-        print(uppers[-1])
-        print()
-        cevap = input("Cevabı Giriniz: ")
-        if cevap == "q":
-            break
-        if cevap.title() == uppers.title():
-            statusTrue[c] = uppers
-            puan = puan + 5
-            print("-------------")
-            print("Tebrikler Doğru Cevap !!!", "Puanınız: {}".format(puan))
-            print("-------------")
+        if bölüm in bölümler:
+            en = input("İngilizce Kelime Giriniz: ")
+            tr = input("Türkçe Kelime Giriniz: ")
+            en = en.lower()
+            tr = tr.lower()
+            kelime_gir = f"INSERT INTO {bölüm} VALUES ('{en}', '{tr}')"
+            vt.execute(kelime_gir)
+            vt.commit()
+            print("Kelime Başarıyla Eklenmiştir.")
         else:
-            statusFalse[c] = uppers
-            puan = puan - 5
-            print("Yanlıs Cevap", "Puanınız: {}".format(puan))
-            print("-------------")
-            print("Doğrusu: {}".format(b))
-            print("-------------")
-    print("Oyun Bitti. Puanınız {}".format(puan))
+            print("Hatalı Bölüm Adı")
+def bölümekle():
+    bölüm_adi = input("Bölüm Adını Giriniz: ")
+    bölüm_adi = bölüm_adi.replace(" ", "_").lower()
+    im.execute(f"CREATE TABLE IF NOT EXISTS {bölüm_adi} (ingilizce, türkce)")
+    vt.commit()
+    print("Bölüm Oluşturuldu")
+def kelimeoyunu():
+    tables_query = "SELECT name FROM sqlite_master WHERE type='table';"
+    cursor = vt.cursor()
+    cursor.execute(tables_query)
+    tables = cursor.fetchall()
+    table_names = [table[0] for table in tables]
+    print("Bölümler:")
+    for table_name in table_names:
+        print(table_name.title())
+    bölüm_qry = input("Bölüm Seçiniz: ")
+    bölüm_qry = bölüm_qry.lower()
 
-    # for dogru in statusTrue.items():
-    #     print(f"Doğru cevaplarınız: {dogru}",end="|")
-    #     for yanlis in statusFalse.items():
-    #         print(f"Yanlis Cevaplarınız: {yanlis}")
-    print("Sonuclar: 1-Doğru Cevaplarım | 2-Yanlıs Cevaplarım")
-    myStat = int(input("Seçiminiz: "))
-    if myStat == 1:
-        for i in statusTrue.items():
-            print("Doğru Cevaplarınız {}".format(str(i)))
-    elif myStat == 2:
-        for i in statusFalse.items():
-            print("Yanlış Cevaplarınız {}".format(str(i)))
-    else:
-        print("Hatalı Bir Seçim Yaptınız")
+    sorulan_sorular = []  # Sorulan soruları takip etmek için boş bir liste oluşturun
+
+    while True:
+        im.execute(f"SELECT * FROM {bölüm_qry} ORDER BY RANDOM() LIMIT 1")
+        kelime = im.fetchone()
+        if kelime:
+            en = kelime[0]  # İngilizce kelime
+            tr = kelime[1]  # Türkçe kelime
+
+            # Eğer soru daha önce sorulduysa, bir sonraki soruya geç
+            if en in sorulan_sorular:
+                continue
+
+            print("Sorunuz: ", en.title())
+            cevap = input("Cevap: ")
+            cevap = cevap.lower()
+
+            if cevap == "q":
+                break
+
+            if cevap == tr:
+                print("Doğru Cevap")
+            else:
+                print("Yanlış Cevap")
+
+            sorulan_sorular.append(en)  # Sorulan soruyu listeye ekle
+        else:
+            print("Bu Bölümde kelime bulunamadı.")
+
+
 def k_listele():
-    wb = load_workbook("Words.xlsx")
-    ws = wb.active
-    for satir in range(2, ws.max_row + 1):
-        for sutun in range(1, ws.max_column + 1):
-            print(" | " + str(ws.cell(satir, sutun).value) + " | ", end="")
-        print()
+    tables_query = "SELECT name FROM sqlite_master WHERE type='table';"
+    cursor = vt.cursor()
+    cursor.execute(tables_query)
+    tables = cursor.fetchall()
+    table_names = [table[0] for table in tables]
+    print("Bölümler:")
+    for table_name in table_names:
+        print(table_name.title())
+    bölüm_qry = input("Listelemek istediğiniz bölümü seçiniz: ")
+    im.execute(f"SELECT * FROM {bölüm_qry}")
+    kelimeler = im.fetchall()
+
+    if kelimeler:
+        print(f"{bölüm_qry.title()} Bölümündeki Kelimeler:")
+        for kelime in kelimeler:
+            en = kelime[0]  # İngilizce kelime
+            tr = kelime[1]  # Türkçe kelime
+            print(f"EN: {en.title()} >> TR: {tr.title()}")
+    else:
+        print("Bu bölümde kelime bulunamadı.")
+
 while True:
-    print("1-Kelime Listele | 2-Kelime Oyunu | 3-Cümle Listele | 4-Cümle Oyunu | 5-Kelime Ekle | 6-Cümle Ekle |  q-"
+    print("")
+    print("1-Kelime Listele | 2-Kelime Oyunu | 3-Kelime Ekle  | 4-Bölüm Ekle |  q-"
           "Çıkış")
     print("*" * 70)
 
@@ -202,17 +120,10 @@ while True:
     if islem == "1":
         k_listele()
     elif islem == "2":
-        islem2 = input("Türkçe Çeviri / İngilizce Çeviri - (Tr)(En) ")
-        Sens = islem2.title()
-        if Sens == "En":
-            KelimeEn()
-        else:
-            KelimeTr()
+        kelimeoyunu()
     elif islem == "3":
-        c_listele()
-    elif islem == "4":
-        Cumle()
-    elif islem == "5":
         kelimeekle()
-    elif islem == "6":
-        cumleekle()
+    elif islem == "4":
+        bölümekle()
+
+vt.close()
